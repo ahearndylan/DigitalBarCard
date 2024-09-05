@@ -1,4 +1,4 @@
-Digital Bar Card Project Overview
+Digital Bar Card Project Overview 
 Project Idea:
 The Digital Bar Card project aims to replace traditional paper-based Bar Cards for Massachusetts lawyers with digital versions. These cards can be stored on mobile devices, like Apple Wallet, and used for verification in court. The project integrates with the Massachusetts Board of Bar Overseers (BBO) database for lawyer verification.
 
