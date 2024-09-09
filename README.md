@@ -32,3 +32,5 @@ Implemented user authentication and lawyer verification.
 Developed digital Bar Card generation and security features.
 Version-controlled the project on GitHub.
 This structure ensures the project is organized, secure, and ready for further development and deployment.
+
+https://aeconners16.atlassian.net/jira/software/projects/KAN/boards/1?atlOrigin=eyJpIjoiZmNhZmUxOGEyOGJlNDBjZjgyNWJjMzVjMzJjNTY1YmEiLCJwIjoiaiJ9
