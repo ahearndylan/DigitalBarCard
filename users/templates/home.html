@@ -1,15 +1,116 @@
-{% if user.is_authenticated %}
-    <div class="alert alert-success" role="alert">
-        <h3>Welcome {{ user.username }}!</h3>
-        <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout?</a>
-        <form id="logout-form" action="{% url 'logout' %}" method="POST" style="display: none;">
-            {% csrf_token %}
-        </form>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Board of Bar Overseers</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #83909e;
+            font-family: 'Arial', sans-serif;
+        }
+        .home-container {
+            margin-top: 50px;
+            max-width: 600px;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        .header-image-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .header-image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        .header-text {
+            text-align: center;
+            font-size: 1.5rem;
+            color: #343a40;
+            margin-bottom: 20px;
+        }
+        .welcome-text {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+        .auth-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        .auth-buttons .btn {
+            width: 120px;
+        }
+        .logout-btn {
+            margin: 10px auto; /* Center horizontally */
+            display: block;
+            width: 120px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container d-flex justify-content-center">
+        <div class="home-container">
+            <!-- Header Image -->
+            <div class="header-image-container">
+                <img src="{% static 'images/massobc_cover.jpg' %}" alt="Board of Bar Overseers Header">
+            </div>
+
+            <!-- Header Text -->
+            <div class="header-text">
+                <h3>Board of Bar Overseers</h3>
+            </div>
+
+            <!-- Welcome Message / User Authentication Block -->
+            {% if user.is_authenticated %}
+                <div class="welcome-text">
+                    <h4>Welcome, {{ user.first_name }}!</h4>
+                </div>
+
+                <a href="/verification/verify_lawyer_form/" class="btn btn-primary">Verify Lawyer Status</a>
+
+
+
+
+                 <!-- Placeholder for verification result -->
+                <div id="verificationResult"></div>
+
+                <!-- Once verified, show the generate card button -->
+                <div id="generateBarCardSection" style="display: none;">
+                    <a href="/bar_cards/generate_bar_card/" id="generateBarCardButton">Generate Bar Card</a>
+                </div>
+
+
+
+
+
+                <!-- Logout Button -->
+                <div class="text-center">
+                        <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="btn btn-danger logout-btn">Logout</a>
+                        <form id="logout-form" action="{% url 'logout' %}" method="POST" style="display: none;">
+                        {% csrf_token %}
+                    </form>
+                </div>
+            {% else %}
+                <div class="welcome-text">
+                    <p>Welcome to the Board of Bar Overseers. Please log in to continue.</p>
+                </div>
+                <!-- Login / Signup Buttons -->
+                <div class="auth-buttons">
+                    <a href="{% url 'register' %}" class="btn btn-primary">Signup</a>
+                    <a href="{% url 'login' %}" class="btn btn-secondary">Login</a>
+                </div>
+            {% endif %}
+        </div>
     </div>
-{% else %}
-    <div class="alert alert-success" role="alert">
-        <h3>Welcome!</h3>
-        <a href="{% url 'register' %}">Signup</a>
-        <a href="{% url 'login' %}">Login</a>
-    </div>
-{% endif %}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+</body>
+</html>

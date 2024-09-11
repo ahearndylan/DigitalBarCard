@@ -1,1 +1,119 @@
-<!--Lawyer verification interface-->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify Lawyer - Board of Bar Overseers</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #83909e;
+            font-family: 'Arial', sans-serif;
+        }
+        .verify-container {
+            margin-top: 50px;
+            max-width: 600px;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        .header-text {
+            text-align: center;
+            font-size: 1.5rem;
+            color: #343a40;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .or-text {
+            text-align: center;
+            margin: 10px 0;
+            font-weight: bold;
+            color: #343a40;
+        }
+        .submit-btn {
+            width: 100%;
+        }
+        .result-message {
+            margin-top: 20px;
+        }
+        .generate-bar-card {
+            display: none; /* Hidden until verification succeeds */
+            margin-top: 20px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container d-flex justify-content-center">
+        <div class="verify-container">
+            <!-- Header Text -->
+            <div class="header-text">
+                <h3>Verify Your Lawyer Status</h3>
+            </div>
+
+            <!-- Verification Form -->
+            <form id="verificationForm">
+                <div class="form-group">
+                    <label for="firstName" class="form-label">First Name:</label>
+                    <input type="text" id="firstName" name="firstName" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="lastName" class="form-label">Last Name:</label>
+                    <input type="text" id="lastName" name="lastName" class="form-control">
+                </div>
+                <div class="or-text">Or</div>
+                <div class="form-group">
+                    <label for="bboNumber" class="form-label">BBO Number:</label>
+                    <input type="text" id="bboNumber" name="bboNumber" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-primary submit-btn">Verify</button>
+            </form>
+
+            <!-- Placeholder for verification result -->
+            <div id="verificationResult" class="result-message"></div>
+
+            <!-- Generate Bar Card Button (hidden by default) -->
+            <a href="/bar_cards/view/" id="generateBarCardButton" class="btn btn-success generate-bar-card">Generate Bar Card</a>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("verificationForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+        const firstName = document.getElementById("firstName").value;
+        const lastName = document.getElementById("lastName").value;
+        const bboNumber = document.getElementById("bboNumber").value;
+
+        let query = '';
+        if (bboNumber) {
+            query = `/verification/verify_lawyer_by_bbo/${bboNumber}/`;
+        } else if (firstName && lastName) {
+            query = `/verification/verify_lawyer_by_name/${firstName}/${lastName}/`;
+        } else {
+            document.getElementById("verificationResult").innerHTML = `<div class="alert alert-danger">Please provide either a BBO number or both first and last name.</div>`;
+            return;
+        }
+
+        fetch(query)
+        .then(response => response.json())
+        .then(data => {
+            const verificationResultDiv = document.getElementById("verificationResult");
+            const generateBarCardButton = document.getElementById("generateBarCardButton");
+
+            if (data.status === 'verified') {
+                verificationResultDiv.innerHTML = `<div class="alert alert-success">Verified: ${data.name}</div>`;
+                generateBarCardButton.style.display = 'block';
+            } else {
+                verificationResultDiv.innerHTML = `<div class="alert alert-danger">Verification failed: ${data.error}</div>`;
+                generateBarCardButton.style.display = 'none';
+            }
+        });
+    });
+
+    </script>
+</body>
+</html>
