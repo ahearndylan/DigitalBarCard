@@ -1,0 +1,5 @@
+Django==4.1.1
+psycopg2==2.9.3  # If using PostgreSQL
+djangorestframework==3.14.0  # If using Django REST Framework
+gunicorn==20.1.0  # If deploying on platforms like Render or Heroku
+whitenoise==5.3.0  # For serving static files in production
