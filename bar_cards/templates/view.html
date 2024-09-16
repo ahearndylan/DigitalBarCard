@@ -10,6 +10,8 @@
 </head>
 <body style="background-color: #83909e;">  <!-- Keep the background color consistent -->
 
+    <br>
+    <br>
     <!-- Centered content -->
     <div class="container d-flex flex-column justify-content-center align-items-center" style="min-height: 100vh;">
         <!-- Bar Card Information -->
@@ -17,11 +19,14 @@
             <div class="card shadow-lg">
                 <div class="card-body text-center">
                     <h1 class="mb-4">Massachusetts Board of Bar Overseers Of the Supreme Judicial Court</h1>
+                    <div class="text-center">
+                        <img src="{% static 'images/BBOlogo.jpg' %}" alt="Massachusetts Seal" style="max-width: 100px; height: auto; margin: 0; margin-bottom: 10px;">
+                    </div>
                     <h3 class="mb-3">Bar Card for {{ name }}</h3> <!-- Display the verified name -->
 
                     <!-- Wallet Pass Download Button -->
                     <p>Click below to add your Bar Card to Apple Wallet:</p>
-                    <a href="{% url 'generate_wallet_pass' %}" class="btn btn-primary mt-3">
+                    <a href="{% url 'generate_wallet_pass' %}" class="btn btn-primary mt-3" style="margin-bottom: 10px;">
                         Add to Apple Wallet
                     </a>
 
@@ -36,24 +41,43 @@
         <div class="col-lg-6 col-md-8 col-sm-12">
             <div class="card shadow-lg">
                 <div class="card-body">
-                    <h4 class="text-center">Important Information</h4>
-                    <p>The Board of Bar Overseers certifies that the person named on the reverse side has filed their annual registration and paid the required fee as per S.J.C. Rule 4:03.</p>
-                    
-                    <h5>Contact Information:</h5>
-                    <ul class="list-unstyled">
-                        <li><strong>Board of Bar Overseers:</strong> 617-728-9700</li>
-                        <li><strong>Office of Bar Counsel:</strong> 617-728-8750</li>
-                        <li><strong>Registration Department:</strong> 617-728-8800</li>
-                        <li><strong>Client Security Board:</strong> 617-728-8800</li>
-                        <li><strong>Lawyers Concerned for Lawyers:</strong> 800-525-0210</li>
-                        <li><strong>IOLTA Committee:</strong> 617-723-9093</li>
+                    <h4 class="text-center mb-4">Important Information</h4>
+                    <p class="mb-4">
+                        The Board of Bar Overseers certifies that the person named on the reverse side has filed their annual registration and paid the required fee as per S.J.C. Rule 4:03.
+                    </p>
+
+                    <h5 class="mb-3">Contact Information:</h5>
+                    <ul class="list-unstyled mb-4">
+                        <li class="mb-2">
+                            <i class="bi bi-telephone-fill me-2"></i><strong>Board of Bar Overseers:</strong> 617-728-9700
+                        </li>
+                        <li class="mb-2">
+                            <i class="bi bi-telephone-fill me-2"></i><strong>Office of Bar Counsel:</strong> 617-728-8750
+                        </li>
+                        <li class="mb-2">
+                            <i class="bi bi-telephone-fill me-2"></i><strong>Registration Department:</strong> 617-728-8800
+                        </li>
+                        <li class="mb-2">
+                            <i class="bi bi-telephone-fill me-2"></i><strong>Client Security Board:</strong> 617-728-8800
+                        </li>
+                        <li class="mb-2">
+                            <i class="bi bi-telephone-fill me-2"></i><strong>Lawyers Concerned for Lawyers:</strong> 800-525-0210
+                        </li>
+                        <li class="mb-2">
+                            <i class="bi bi-telephone-fill me-2"></i><strong>IOLTA Committee:</strong> 617-723-9093
+                        </li>
                     </ul>
 
-                    <p>The Office of Bar Counsel's Ethics Hotline is available at <strong>617-728-8750</strong> on Monday, Wednesday, and Friday, between 2:00 PM and 4:00 PM.</p>
+                    <p class="mb-0">
+                        The Office of Bar Counsel's Ethics Hotline is available at <strong>617-728-8750</strong> on Monday, Wednesday, and Friday, between 2:00 PM and 4:00 PM.
+                    </p>
                 </div>
             </div>
         </div>
     </div>
+<br>
+<br>
+<br>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>

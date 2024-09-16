@@ -50,7 +50,13 @@
         .logout-btn {
             margin: 10px auto; /* Center horizontally */
             display: block;
-            width: 120px;
+            width: 100px;
+        }
+
+        .btn-primary{
+            margin: 10px auto; /* Center horizontally */
+            display: block;
+            width: 200px;
         }
     </style>
 </head>
@@ -64,7 +70,11 @@
 
             <!-- Header Text -->
             <div class="header-text">
-                <h3>Board of Bar Overseers</h3>
+                <h3>Massachusetts Board of Bar Overseers</h3>
+            </div>
+
+            <div class="text-center">
+                <img src="{% static 'images/BBOlogo.jpg' %}" alt="Massachusetts Seal" style="max-width: 100px; height: auto; margin: 0; margin-bottom: 10px;">
             </div>
 
             <!-- Welcome Message / User Authentication Block -->
@@ -88,7 +98,7 @@
 
 
 
-
+                
 
                 <!-- Logout Button -->
                 <div class="text-center">
