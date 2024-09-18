@@ -6,15 +6,6 @@ import qrcode
 from io import BytesIO
 import requests
 
-
-def save_verified_name(request):
-    if request.method == 'POST':
-        data = json.loads(request.body)
-        request.session['verified_name'] = data.get('name')  # Store the name in the session
-        request.session['bbo_number'] = data.get('bbo_number')  # Store BBO number in the session
-        return JsonResponse({'status': 'success'})
-
-
 def view_bar_card(request):
     bbo_number = request.session.get('bbo_number')
 

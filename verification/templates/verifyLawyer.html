@@ -139,7 +139,7 @@
             const firstName = document.getElementById("firstName").value;
             const lastName = document.getElementById("lastName").value;
             const bboNumber = document.getElementById("bboNumber").value;
-
+    
             let query = '';
             if (bboNumber) {
                 query = `/verification/verify_lawyer_by_bbo/${bboNumber}/`;
@@ -149,7 +149,7 @@
                 document.getElementById("verificationResult").innerHTML = `<div class="alert alert-danger">Please provide either a BBO number or both first and last name.</div>`;
                 return;
             }
-
+    
             fetch(query)
             .then(response => response.json())
             .then(data => {
@@ -157,21 +157,14 @@
                 const generateBarCardButton = document.getElementById("generateBarCardButton");
                 const esignatureCheckbox = document.getElementById("esignature-checkbox");
                 const checkboxInstruction = document.getElementById("checkbox-instruction");
-
+    
                 if (data.status === 'verified') {
-                    fetch('/bar_cards/save_name/', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({ name: data.name, bbo_number: data.bbo_number })
-                    });
-
+                    
                     verificationResultDiv.innerHTML = `<div class="alert alert-success">Verified: ${data.name}</div>`;
                     esignatureCheckbox.style.display = 'block';
                     checkboxInstruction.style.display = 'block';
                     generateBarCardButton.style.display = 'none';
-
+    
                     document.getElementById('generate-signature').addEventListener('change', function() {
                         if (this.checked) {
                             generateBarCardButton.style.display = 'block';
@@ -179,7 +172,7 @@
                             generateBarCardButton.style.display = 'none';
                         }
                     });
-
+    
                 } else {
                     verificationResultDiv.innerHTML = `<div class="alert alert-danger">Verification failed: ${data.error}</div>`;
                     esignatureCheckbox.style.display = 'none';
@@ -188,5 +181,6 @@
             });
         });
     </script>
+    
 </body>
 </html>
