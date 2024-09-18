@@ -8,7 +8,7 @@ def verify_lawyer_form(request):
 
 # Verify lawyer by name using the mock API
 def verify_lawyer_by_name(request, first_name, last_name):
-    url = f"http://127.0.0.1:8000/mockapi/verify_name/{first_name}/{last_name}/"
+    url = f"https://mockapi-xlku.onrender.com/verify_name/{first_name}/{last_name}/"
     response = requests.get(url)
     
     if response.status_code == 200:
@@ -26,7 +26,7 @@ def verify_lawyer_by_name(request, first_name, last_name):
 
 # Verify lawyer by BBO number using the mock API
 def verify_lawyer_by_bbo(request, bbo_number):
-    url = f"http://127.0.0.1:8000/mockapi/verify_bbo/{bbo_number}/"
+    url = f"https://mockapi-xlku.onrender.com/verify_bbo/{bbo_number}/"
     response = requests.get(url)
     
     if response.status_code == 200:
