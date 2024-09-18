@@ -24,14 +24,14 @@ lawyers = [
     },
     {
         "name": "John Glynn",
-        "bbo_number": "789012",
+        "bbo_number": "123456",
         "status": "active",
         "public_discipline": True,
         "dues_paid": True
     },
     {
-        "name": "Timothy Smith",
-        "bbo_number": "345678",
+        "name": "Tim Smith",
+        "bbo_number": "789012",
         "status": "active",
         "public_discipline": False,
         "dues_paid": False

@@ -97,7 +97,8 @@ def bar_card_display(request, bbo_number):
             'admittance_date': lawyer.get('admittance_date'),
             'expiration_date': expiration_date,
             'law_firm': lawyer.get('law_firm'),
-            'address': lawyer.get('address')
+            'address': lawyer.get('address'),
+            'signature': lawyer['name']
         }
 
         return render(request, 'bar_card.html', context)

@@ -20,7 +20,7 @@ def verify_lawyer_by_name(request, first_name, last_name):
         else:
             # Store the BBO number in the session after successful verification
             request.session['bbo_number'] = lawyer['bbo_number']
-            return JsonResponse({'status': 'verified', 'name': lawyer['name'], 'status_message': 'Active'})
+            return JsonResponse({'status': 'verified', 'name': f"Attorney {lawyer['name']}", 'status_message': 'Active'})
     else:
         return JsonResponse({'status': 'unverified', 'error': 'Lawyer not found'})
 
@@ -39,6 +39,6 @@ def verify_lawyer_by_bbo(request, bbo_number):
         else:
             # Store the BBO number in the session after successful verification
             request.session['bbo_number'] = lawyer['bbo_number']
-            return JsonResponse({'status': 'verified', 'name': lawyer['name'], 'status_message': 'Active'})
+            return JsonResponse({'status': 'verified', 'name': f"Attorney {lawyer['name']}", 'status_message': 'Active'})
     else:
         return JsonResponse({'status': 'unverified', 'error': 'Lawyer not found'})

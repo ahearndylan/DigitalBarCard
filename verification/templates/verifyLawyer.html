@@ -13,7 +13,6 @@
     <link rel="manifest" href="{% static 'images/favicon/site.webmanifest' %}">
     <link rel="shortcut icon" href="{% static 'images/favicon/favicon.ico' %}">
 
-    
     <style>
         body {
             background-color: #83909e;
@@ -65,10 +64,17 @@
         .result-message {
             margin-top: 20px;
         }
-        .generate-bar-card {
+        .generate-bar-card, #esignature-checkbox, #checkbox-instruction {
             display: none; /* Hidden until verification succeeds */
             margin-top: 20px;
             width: 100%;
+        }
+        /* Stylized font for the generated signature */
+        .signature-style {
+            font-family: 'Cursive', sans-serif;
+            font-size: 24px;
+            font-weight: bold;
+            color: #000;
         }
     </style>
 </head>
@@ -113,11 +119,26 @@
                 <button type="submit" class="btn btn-primary submit-btn">Verify</button>
             </form>
 
+            <!-- Placeholder for the generated signature -->
+
             <!-- Placeholder for verification result -->
             <div id="verificationResult" class="result-message"></div>
 
+            <!-- Instruction for checking the box -->
+            <div id="checkbox-instruction" class="mt-3">
+                <p>Please check the box to generate your card:</p>
+            </div>
+
+            <!-- eSignature checkbox (appears after verification) -->
+            <div id="esignature-checkbox" class="form-check mt-3">
+                <input class="form-check-input" type="checkbox" id="generate-signature" name="generate-signature">
+                <label class="form-check-label" for="generate-signature">
+                    Use an electronic signature
+                </label>
+            </div>
+
             <!-- Generate Bar Card Button (hidden by default) -->
-            <a href="/bar_cards/view/" id="generateBarCardButton" class="btn btn-success generate-bar-card">Generate Bar Card</a>
+            <a href="/bar_cards/view/" id="generateBarCardButton" class="btn btn-success generate-bar-card" disabled>Generate Bar Card</a>
         </div>
     </div>
 
@@ -126,48 +147,70 @@
     <br>
     <br>
     <br>
+    <br>
 
     <script>
         document.getElementById("verificationForm").addEventListener("submit", function(e) {
-        e.preventDefault();
-        const firstName = document.getElementById("firstName").value;
-        const lastName = document.getElementById("lastName").value;
-        const bboNumber = document.getElementById("bboNumber").value;
+            e.preventDefault();
+            const firstName = document.getElementById("firstName").value;
+            const lastName = document.getElementById("lastName").value;
+            const bboNumber = document.getElementById("bboNumber").value;
 
-        let query = '';
-        if (bboNumber) {
-            query = `/verification/verify_lawyer_by_bbo/${bboNumber}/`;
-        } else if (firstName && lastName) {
-            query = `/verification/verify_lawyer_by_name/${firstName}/${lastName}/`;
-        } else {
-            document.getElementById("verificationResult").innerHTML = `<div class="alert alert-danger">Please provide either a BBO number or both first and last name.</div>`;
-            return;
-        }
-
-        fetch(query)
-        .then(response => response.json())
-        .then(data => {
-            const verificationResultDiv = document.getElementById("verificationResult");
-            const generateBarCardButton = document.getElementById("generateBarCardButton");
-
-            if (data.status === 'verified') {
-                // Save the verified name and BBO number in the session
-                fetch('/bar_cards/save_name/', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ name: data.name, bbo_number: data.bbo_number })
-                });
-
-                verificationResultDiv.innerHTML = `<div class="alert alert-success">Verified: ${data.name}</div>`;
-                generateBarCardButton.style.display = 'block';
+            let query = '';
+            if (bboNumber) {
+                query = `/verification/verify_lawyer_by_bbo/${bboNumber}/`;
+            } else if (firstName && lastName) {
+                query = `/verification/verify_lawyer_by_name/${firstName}/${lastName}/`;
             } else {
-                verificationResultDiv.innerHTML = `<div class="alert alert-danger">Verification failed: ${data.error}</div>`;
-                generateBarCardButton.style.display = 'none';
+                document.getElementById("verificationResult").innerHTML = `<div class="alert alert-danger">Please provide either a BBO number or both first and last name.</div>`;
+                return;
             }
+
+            fetch(query)
+            .then(response => response.json())
+            .then(data => {
+                const verificationResultDiv = document.getElementById("verificationResult");
+                const generateBarCardButton = document.getElementById("generateBarCardButton");
+                const signaturePlaceholder = document.getElementById("signature-placeholder");
+                const esignatureCheckbox = document.getElementById("esignature-checkbox");
+                const checkboxInstruction = document.getElementById("checkbox-instruction");
+
+                if (data.status === 'verified') {
+                    // Save the verified name and BBO number in the session
+                    fetch('/bar_cards/save_name/', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ name: data.name, bbo_number: data.bbo_number })
+                    });
+
+                    verificationResultDiv.innerHTML = `<div class="alert alert-success">Verified: ${data.name}</div>`;
+                    esignatureCheckbox.style.display = 'block';
+                    checkboxInstruction.style.display = 'block'; // Show the instruction after verification
+
+                    // Hide the button until checkbox is checked
+                    generateBarCardButton.style.display = 'none';
+
+                    // Add event listener for the checkbox
+                    document.getElementById('generate-signature').addEventListener('change', function() {
+                        if (this.checked) {
+                            generateBarCardButton.style.display = 'block'; // Show the button when the checkbox is checked
+                            signaturePlaceholder.innerHTML = data.name;  // Use the lawyer's name as the signature
+                        } else {
+                            generateBarCardButton.style.display = 'none'; // Hide the button if unchecked
+                            signaturePlaceholder.innerHTML = ''; // Clear the signature if unchecked
+                        }
+                    });
+
+                } else {
+                    verificationResultDiv.innerHTML = `<div class="alert alert-danger">Verification failed: ${data.error}</div>`;
+                    esignatureCheckbox.style.display = 'none';
+                    checkboxInstruction.style.display = 'none';
+                    signaturePlaceholder.innerHTML = ''; // Clear the signature if verification fails
+                }
+            });
         });
-    });
     </script>
 </body>
 </html>
