@@ -12,7 +12,7 @@ def view_bar_card(request):
     if not bbo_number:
         return HttpResponse("No BBO number found in session. Please validate a lawyer first.", status=400)
 
-    response = requests.get(f'http://127.0.0.1:8000/mockapi/verify_bbo/{bbo_number}/')
+    response = requests.get(f'https://mockapi-xlku.onrender.com/verify_bbo/{bbo_number}/')
 
     if response.status_code == 200:
         lawyer = response.json()
@@ -38,7 +38,7 @@ def generate_qr_code(request):
     if not bbo_number:
         return HttpResponse("No BBO number found in session. Please verify the lawyer first.", status=400)
 
-    qr_data = f"http://127.0.0.1:8000/bar_cards/display/{bbo_number}/"
+    qr_data = f"https://mockapi-xlku.onrender.com/bar_cards/display/{bbo_number}/"
     qr = qrcode.QRCode(
         version=1,
         error_correction=qrcode.constants.ERROR_CORRECT_L,
@@ -57,7 +57,7 @@ def generate_qr_code(request):
 
 
 def bar_card_display(request, bbo_number):
-    response = requests.get(f'http://127.0.0.1:8000/mockapi/verify_bbo/{bbo_number}/')
+    response = requests.get(f'https://mockapi-xlku.onrender.com/verify_bbo/{bbo_number}/')
 
     if response.status_code == 200:
         lawyer = response.json()
