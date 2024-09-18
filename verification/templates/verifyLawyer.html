@@ -45,34 +45,12 @@
             margin-top: 20px;
             width: 100%;
         }
-        .header-image-container {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .header-image-container img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-        }
     </style>
 </head>
 <body>
     <div class="container d-flex justify-content-center">
         <div class="verify-container">
-            <!-- Header Image and Text (same as Home page) -->
-            <div class="header-image-container">
-                <img src="{% static 'images/massobc_cover.jpg' %}" alt="Board of Bar Overseers Header" class="img-fluid">
-            </div>
-
-            <div class="header-text">
-                <h3>Massachusetts Board of Bar Overseers</h3>
-            </div>
-
-            <div class="text-center">
-                <img src="{% static 'images/BBOlogo.jpg' %}" alt="Massachusetts Seal" style="max-width: 100px; height: auto; margin: 0; margin-bottom: 10px;">
-            </div>
-
-            <!-- Retain the "Verify Your Lawyer Status" text -->
+            <!-- Header Text -->
             <div class="header-text">
                 <h3>Verify Your Lawyer Status</h3>
             </div>
@@ -102,10 +80,6 @@
             <a href="/bar_cards/view/" id="generateBarCardButton" class="btn btn-success generate-bar-card">Generate Bar Card</a>
         </div>
     </div>
-    <br>
-    <br>
-    <br>
-    <br>
 
     <script>
         document.getElementById("verificationForm").addEventListener("submit", function(e) {
@@ -139,6 +113,7 @@
             }
         });
     });
+
     </script>
 </body>
 </html>
