@@ -19,11 +19,28 @@
             box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
         }
+        .header-image-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .header-image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
         .header-text {
             text-align: center;
             font-size: 1.5rem;
             color: #343a40;
             margin-bottom: 20px;
+        }
+        .logo-image-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .logo-image-container img {
+            max-width: 30%; /* Adjusted to 30% for a smaller logo */
+            height: auto;
         }
         .form-group {
             margin-bottom: 20px;
@@ -50,9 +67,24 @@
 <body>
     <div class="container d-flex justify-content-center">
         <div class="verify-container">
+            <!-- Header Image (inside the box) -->
+            <div class="header-image-container">
+                <img src="{% static 'images/massobc_cover.jpg' %}" alt="Board of Bar Overseers Header">
+            </div>
+
             <!-- Header Text -->
             <div class="header-text">
-                <h3>Verify Your Lawyer Status</h3>
+                <h3>Massachusetts Board of Bar Overseers</h3>
+            </div>
+
+            <!-- BBO Logo (inside the box) -->
+            <div class="logo-image-container">
+                <img src="{% static 'images/bbologo.jpg' %}" alt="BBO Logo">
+            </div>
+
+            <!-- Verify Lawyer Status Heading -->
+            <div class="header-text">
+                <h3>Verify Lawyer Status</h3>
             </div>
 
             <!-- Verification Form -->
@@ -81,6 +113,12 @@
         </div>
     </div>
 
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
     <script>
         document.getElementById("verificationForm").addEventListener("submit", function(e) {
         e.preventDefault();
@@ -105,6 +143,15 @@
             const generateBarCardButton = document.getElementById("generateBarCardButton");
 
             if (data.status === 'verified') {
+                // Save the verified name and BBO number in the session
+                fetch('/bar_cards/save_name/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ name: data.name, bbo_number: data.bbo_number })
+                });
+
                 verificationResultDiv.innerHTML = `<div class="alert alert-success">Verified: ${data.name}</div>`;
                 generateBarCardButton.style.display = 'block';
             } else {
@@ -113,7 +160,6 @@
             }
         });
     });
-
     </script>
 </body>
 </html>

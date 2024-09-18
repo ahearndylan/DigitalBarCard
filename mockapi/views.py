@@ -15,10 +15,10 @@ lawyers = [
     {
         "status": "active",
         "name": "Ashley Ahearn",
-        "bbo_number": "123456",
+        "bbo_number": "708891",
         "public_discipline": False,
         "dues_paid": True,
-        "admittance_date": "12/20/2020",
+        "admittance_date": "12/14/2021",
         "law_firm": "Law Offices of Robert D. Ahearn, P.C.",
         "address": "15 Cottage Ave, Suite 202 Quincy, Massachusetts 02169"
     },

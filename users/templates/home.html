@@ -34,6 +34,14 @@
             color: #343a40;
             margin-bottom: 20px;
         }
+        .logo-image-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .logo-image-container img {
+            max-width: 25%; /* Adjusted to 30% for a smaller logo */
+            height: auto;
+        }
         .welcome-text {
             text-align: center;
             margin-bottom: 20px;
@@ -64,7 +72,12 @@
 
             <!-- Header Text -->
             <div class="header-text">
-                <h3>Board of Bar Overseers</h3>
+                <h3>Massachusetts Board of Bar Overseers</h3>
+            </div>
+
+            <!-- BBO Logo -->
+            <div class="logo-image-container">
+                <img src="{% static 'images/bbologo.jpg' %}" alt="BBO Logo">
             </div>
 
             <!-- Welcome Message / User Authentication Block -->
@@ -73,12 +86,11 @@
                     <h4>Welcome, {{ user.first_name }}!</h4>
                 </div>
 
-                <a href="/verification/verify_lawyer_form/" class="btn btn-primary">Verify Lawyer Status</a>
+                <div class="text-center">
+                    <a href="/verification/verify_lawyer_form/" class="btn btn-primary" style="width: 180px;">Verify Lawyer Status</a>
+                </div>
 
-
-
-
-                 <!-- Placeholder for verification result -->
+                <!-- Placeholder for verification result -->
                 <div id="verificationResult"></div>
 
                 <!-- Once verified, show the generate card button -->
@@ -86,14 +98,10 @@
                     <a href="/bar_cards/generate_bar_card/" id="generateBarCardButton">Generate Bar Card</a>
                 </div>
 
-
-
-
-
                 <!-- Logout Button -->
                 <div class="text-center">
-                        <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="btn btn-danger logout-btn">Logout</a>
-                        <form id="logout-form" action="{% url 'logout' %}" method="POST" style="display: none;">
+                    <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="btn btn-danger logout-btn">Logout</a>
+                    <form id="logout-form" action="{% url 'logout' %}" method="POST" style="display: none;">
                         {% csrf_token %}
                     </form>
                 </div>
