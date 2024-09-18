@@ -1,10 +1,9 @@
 from django.shortcuts import render
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 import json
 from datetime import datetime, timedelta
-import qrcode, os, zipfile
+import qrcode
 from io import BytesIO
-from django.http import HttpResponse
 import requests
 
 
@@ -17,23 +16,17 @@ def save_verified_name(request):
 
 
 def view_bar_card(request):
-    # Get the BBO number from the session
     bbo_number = request.session.get('bbo_number')
 
     if not bbo_number:
         return HttpResponse("No BBO number found in session. Please validate a lawyer first.", status=400)
 
-    # Make the request to the mock API to fetch the lawyer's data by BBO number
     response = requests.get(f'http://127.0.0.1:8000/mockapi/verify_bbo/{bbo_number}/')
 
     if response.status_code == 200:
         lawyer = response.json()
+        expiration_date = (datetime.now() + timedelta(days=365)).strftime('%m/%d/%Y')
 
-        # Assuming expiration date is one year from today
-        creation_date = datetime.now()
-        expiration_date = (creation_date + timedelta(days=365)).strftime('%m/%d/%Y')
-
-        # Prepare the context with the lawyer's details
         context = {
             'name': lawyer['name'],
             'bbo_number': lawyer['bbo_number'],
@@ -49,16 +42,12 @@ def view_bar_card(request):
 
 
 def generate_qr_code(request):
-    # Get the BBO number from the session
     bbo_number = request.session.get('bbo_number')
 
     if not bbo_number:
         return HttpResponse("No BBO number found in session. Please verify the lawyer first.", status=400)
 
-    # Use localhost (127.0.0.1) for the QR code URL
     qr_data = f"http://127.0.0.1:8000/bar_cards/display/{bbo_number}/"
-
-    # Create the QR code
     qr = qrcode.QRCode(
         version=1,
         error_correction=qrcode.constants.ERROR_CORRECT_L,
@@ -68,29 +57,21 @@ def generate_qr_code(request):
     qr.add_data(qr_data)
     qr.make(fit=True)
 
-    # Generate the QR code image
     img = qr.make_image(fill='black', back_color='white')
-
-    # Save the image in an in-memory file
     img_io = BytesIO()
     img.save(img_io, format='PNG')
     img_io.seek(0)
 
-    # Return the image as an HTTP response
     return HttpResponse(img_io, content_type='image/png')
 
+
 def bar_card_display(request, bbo_number):
-    # Retrieve lawyer details from the mock API
     response = requests.get(f'http://127.0.0.1:8000/mockapi/verify_bbo/{bbo_number}/')
 
     if response.status_code == 200:
         lawyer = response.json()
+        expiration_date = (datetime.now() + timedelta(days=365)).strftime('%m/%d/%Y')
 
-        # Assuming expiration date is one year from today
-        creation_date = datetime.now()
-        expiration_date = (creation_date + timedelta(days=365)).strftime('%m/%d/%Y')
-
-        # Prepare the context with the lawyer's details
         context = {
             'name': lawyer['name'],
             'bbo_number': lawyer['bbo_number'],

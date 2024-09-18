@@ -45,7 +45,6 @@ def verify_lawyer_by_bbo(request, bbo_number):
     else:
         return JsonResponse({'error': 'BBO number not found'}, status=404)
 
-# Simulate verifying a lawyer by full name
 def verify_lawyer_by_name(request, first_name, last_name):
     full_name = f"{first_name.capitalize()} {last_name.capitalize()}"
     lawyer = next((lawyer for lawyer in lawyers if lawyer["name"].lower() == full_name.lower()), None)

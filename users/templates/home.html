@@ -12,7 +12,6 @@
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon/favicon-16x16.png' %}">
     <link rel="manifest" href="{% static 'images/favicon/site.webmanifest' %}">
     <link rel="shortcut icon" href="{% static 'images/favicon/favicon.ico' %}">
-
     
     <style>
         body {
@@ -47,7 +46,7 @@
             margin-bottom: 20px;
         }
         .logo-image-container img {
-            max-width: 25%; /* Adjusted to 30% for a smaller logo */
+            max-width: 25%;
             height: auto;
         }
         .welcome-text {
@@ -64,7 +63,7 @@
             width: 120px;
         }
         .logout-btn {
-            margin: 10px auto; /* Center horizontally */
+            margin: 10px auto;
             display: block;
             width: 120px;
         }
@@ -73,22 +72,18 @@
 <body>
     <div class="container d-flex justify-content-center">
         <div class="home-container">
-            <!-- Header Image -->
             <div class="header-image-container">
                 <img src="{% static 'images/massobc_cover.jpg' %}" alt="Board of Bar Overseers Header">
             </div>
 
-            <!-- Header Text -->
             <div class="header-text">
                 <h3>Massachusetts Board of Bar Overseers</h3>
             </div>
 
-            <!-- BBO Logo -->
             <div class="logo-image-container">
                 <img src="{% static 'images/bbologo.jpg' %}" alt="BBO Logo">
             </div>
 
-            <!-- Welcome Message / User Authentication Block -->
             {% if user.is_authenticated %}
                 <div class="welcome-text">
                     <h4>Welcome, {{ user.first_name }}!</h4>
@@ -98,15 +93,12 @@
                     <a href="/verification/verify_lawyer_form/" class="btn btn-primary" style="width: 180px;">Verify Lawyer Status</a>
                 </div>
 
-                <!-- Placeholder for verification result -->
                 <div id="verificationResult"></div>
 
-                <!-- Once verified, show the generate card button -->
                 <div id="generateBarCardSection" style="display: none;">
                     <a href="/bar_cards/generate_bar_card/" id="generateBarCardButton">Generate Bar Card</a>
                 </div>
 
-                <!-- Logout Button -->
                 <div class="text-center">
                     <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="btn btn-danger logout-btn">Logout</a>
                     <form id="logout-form" action="{% url 'logout' %}" method="POST" style="display: none;">
@@ -117,7 +109,6 @@
                 <div class="welcome-text">
                     <p>Welcome to the Board of Bar Overseers. Please log in to continue.</p>
                 </div>
-                <!-- Login / Signup Buttons -->
                 <div class="auth-buttons">
                     <a href="{% url 'register' %}" class="btn btn-primary">Signup</a>
                     <a href="{% url 'login' %}" class="btn btn-secondary">Login</a>

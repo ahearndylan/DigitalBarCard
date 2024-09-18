@@ -26,7 +26,7 @@
             box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
         }
-        .header-image-container {
+        .header-image-container, .logo-image-container {
             text-align: center;
             margin-bottom: 20px;
         }
@@ -35,19 +35,15 @@
             height: auto;
             border-radius: 8px;
         }
+        .logo-image-container img {
+            max-width: 25%;
+            height: auto;
+        }
         .header-text {
             text-align: center;
             font-size: 1.5rem;
             color: #343a40;
             margin-bottom: 20px;
-        }
-        .logo-image-container {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .logo-image-container img {
-            max-width: 30%; /* Adjusted to 30% for a smaller logo */
-            height: auto;
         }
         .form-group {
             margin-bottom: 20px;
@@ -65,11 +61,10 @@
             margin-top: 20px;
         }
         .generate-bar-card, #esignature-checkbox, #checkbox-instruction {
-            display: none; /* Hidden until verification succeeds */
+            display: none;
             margin-top: 20px;
             width: 100%;
         }
-        /* Stylized font for the generated signature */
         .signature-style {
             font-family: 'Cursive', sans-serif;
             font-size: 24px;
@@ -81,27 +76,22 @@
 <body>
     <div class="container d-flex justify-content-center">
         <div class="verify-container">
-            <!-- Header Image (inside the box) -->
             <div class="header-image-container">
                 <img src="{% static 'images/massobc_cover.jpg' %}" alt="Board of Bar Overseers Header">
             </div>
 
-            <!-- Header Text -->
             <div class="header-text">
                 <h3>Massachusetts Board of Bar Overseers</h3>
             </div>
 
-            <!-- BBO Logo (inside the box) -->
             <div class="logo-image-container">
                 <img src="{% static 'images/bbologo.jpg' %}" alt="BBO Logo">
             </div>
 
-            <!-- Verify Lawyer Status Heading -->
             <div class="header-text">
                 <h3>Verify Lawyer Status</h3>
             </div>
 
-            <!-- Verification Form -->
             <form id="verificationForm">
                 <div class="form-group">
                     <label for="firstName" class="form-label">First Name:</label>
@@ -119,17 +109,12 @@
                 <button type="submit" class="btn btn-primary submit-btn">Verify</button>
             </form>
 
-            <!-- Placeholder for the generated signature -->
-
-            <!-- Placeholder for verification result -->
             <div id="verificationResult" class="result-message"></div>
 
-            <!-- Instruction for checking the box -->
             <div id="checkbox-instruction" class="mt-3">
                 <p>Please check the box to generate your card:</p>
             </div>
 
-            <!-- eSignature checkbox (appears after verification) -->
             <div id="esignature-checkbox" class="form-check mt-3">
                 <input class="form-check-input" type="checkbox" id="generate-signature" name="generate-signature">
                 <label class="form-check-label" for="generate-signature">
@@ -137,7 +122,6 @@
                 </label>
             </div>
 
-            <!-- Generate Bar Card Button (hidden by default) -->
             <a href="/bar_cards/view/" id="generateBarCardButton" class="btn btn-success generate-bar-card" disabled>Generate Bar Card</a>
         </div>
     </div>
@@ -171,12 +155,10 @@
             .then(data => {
                 const verificationResultDiv = document.getElementById("verificationResult");
                 const generateBarCardButton = document.getElementById("generateBarCardButton");
-                const signaturePlaceholder = document.getElementById("signature-placeholder");
                 const esignatureCheckbox = document.getElementById("esignature-checkbox");
                 const checkboxInstruction = document.getElementById("checkbox-instruction");
 
                 if (data.status === 'verified') {
-                    // Save the verified name and BBO number in the session
                     fetch('/bar_cards/save_name/', {
                         method: 'POST',
                         headers: {
@@ -187,19 +169,14 @@
 
                     verificationResultDiv.innerHTML = `<div class="alert alert-success">Verified: ${data.name}</div>`;
                     esignatureCheckbox.style.display = 'block';
-                    checkboxInstruction.style.display = 'block'; // Show the instruction after verification
-
-                    // Hide the button until checkbox is checked
+                    checkboxInstruction.style.display = 'block';
                     generateBarCardButton.style.display = 'none';
 
-                    // Add event listener for the checkbox
                     document.getElementById('generate-signature').addEventListener('change', function() {
                         if (this.checked) {
-                            generateBarCardButton.style.display = 'block'; // Show the button when the checkbox is checked
-                            signaturePlaceholder.innerHTML = data.name;  // Use the lawyer's name as the signature
+                            generateBarCardButton.style.display = 'block';
                         } else {
-                            generateBarCardButton.style.display = 'none'; // Hide the button if unchecked
-                            signaturePlaceholder.innerHTML = ''; // Clear the signature if unchecked
+                            generateBarCardButton.style.display = 'none';
                         }
                     });
 
@@ -207,7 +184,6 @@
                     verificationResultDiv.innerHTML = `<div class="alert alert-danger">Verification failed: ${data.error}</div>`;
                     esignatureCheckbox.style.display = 'none';
                     checkboxInstruction.style.display = 'none';
-                    signaturePlaceholder.innerHTML = ''; // Clear the signature if verification fails
                 }
             });
         });

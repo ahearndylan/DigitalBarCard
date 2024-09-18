@@ -12,7 +12,6 @@
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon/favicon-16x16.png' %}">
     <link rel="manifest" href="{% static 'images/favicon/site.webmanifest' %}">
     <link rel="shortcut icon" href="{% static 'images/favicon/favicon.ico' %}">
-
     
     <style>
         body {
@@ -65,18 +64,15 @@
 <body>
     <div class="container d-flex justify-content-center">
         <div class="login-container">
-            <!-- Logo Images -->
             <div class="images-container">
                 <img src="{% static 'images/BBOlogo.jpg' %}" alt="Board of Bar Overseers">
             </div>
 
-            <!-- Header Text -->
             <div class="header-text">
                 <h3>Board of Bar Overseers</h3>
                 <h6>Please log in to access your account</h6>
             </div>
 
-            <!-- Login Form -->
             <form action="" method="POST">
                 {% csrf_token %}
                 {% for field in form %}
@@ -85,13 +81,11 @@
                         {{ field }}
                     </div>
                 {% endfor %}
-                <!-- Centered Button -->
                 <div class="text-center">
                     <button type="submit" class="btn btn-primary">Login</button>
                 </div>
             </form>
 
-            <!-- Signup Link -->
             <div class="signup-link">
                 <p>Don't have an account? <a href="{% url 'register' %}">Signup here</a></p>
             </div>

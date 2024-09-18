@@ -5,10 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bar Card - Massachusetts Board of Bar Overseers</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-    <!-- Include Handwriting Font from Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap" rel="stylesheet">
-
     <style>
         body {
             background-color: #83909e;
@@ -33,43 +30,40 @@
             font-size: 1rem;
             margin: 5px 0;
         }
-
-        /* Signature section styling */
         .signature-section {
-    text-align: center; /* Center the entire signature section */
-    margin-top: 20px;
-}
+            text-align: center; 
+            margin-top: 20px;
+        }
 
-.signature-label {
-    display: inline-block;
-    font-size: 1rem;
-    font-weight: bold;
-}
+        .signature-label {
+            display: inline-block;
+            font-size: 1rem;
+            font-weight: bold;
+        }
 
-.signature-line {
-    display: inline-block;
-    border-bottom: 1px solid black;
-    position: relative;
-    padding-right: 5px; /* Add slight padding to avoid text touching the line end */
-    min-width: 150px; /* Ensure a minimum width for short names */
-    max-width: 100%; /* Allow the signature line to fill available space */
-    width: auto; /* Automatically adjust the width based on name length */
-    vertical-align: bottom; /* Align it with the signature label */
-}
+        .signature-line {
+            display: inline-block;
+            border-bottom: 1px solid black;
+            position: relative;
+            padding-right: 5px; 
+            min-width: 150px; 
+            max-width: 100%; 
+            width: auto; 
+            vertical-align: bottom; 
+        }
 
-.signature {
-    font-family: 'Satisfy', Cursive, sans-serif;
-    font-size: 24px;
-    font-weight: 400;
-    color: #333;
-    position: absolute;
-    top: -30px; /* Adjust position to sit on the line */
-    left: 0;
-    width: 100%;
-    text-align: center;
-    white-space: nowrap; /* Prevent the name from wrapping onto a second line */
-}
-
+        .signature {
+            font-family: 'Satisfy', Cursive, sans-serif;
+            font-size: 24px;
+            font-weight: 400;
+            color: #333;
+            position: absolute;
+            top: -30px; 
+            left: 0;
+            width: 100%;
+            text-align: center;
+            white-space: nowrap; 
+        }
     </style>
 </head>
 <body>
@@ -78,23 +72,21 @@
     <h1>Massachusetts Board of Bar Overseers Of the Supreme Judicial Court</h1>
     
     <div class="details">
-        <p><strong>Admittance Date:</strong> {{ admittance_date }}</p> <!-- Dynamically insert admittance date -->
-        <p><strong>Expiration Date:</strong> {{ expiration_date }}</p> <!-- Dynamically insert expiration date -->
-        <p><strong>BBO Number:</strong> {{ bbo_number }}</p> <!-- Dynamically insert BBO number -->
+        <p><strong>Admittance Date:</strong> {{ admittance_date }}</p> 
+        <p><strong>Expiration Date:</strong> {{ expiration_date }}</p> 
+        <p><strong>BBO Number:</strong> {{ bbo_number }}</p> 
         <p>{{ name }}</p>
-        <p>{{ law_firm }}</p> <!-- Dynamically insert law firm -->
-        <p>{{ address }}</p> <!-- Dynamically insert address -->
+        <p>{{ law_firm }}</p> 
+        <p>{{ address }}</p> 
     </div>
 
-    <!-- Signature section -->
     <div class="signature-section">
         <span class="signature-label">Signature: </span>
         <div class="signature-line">
-            <span class="signature">{{ signature }}</span> <!-- Display the signature on the line -->
+            <span class="signature">{{ signature }}</span> 
         </div>
     </div>
     <br>
-
 
     <div class="footer">
         <p><em>This certificate is valid for 45 days after the expiration date.</em></p>
