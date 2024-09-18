@@ -38,7 +38,7 @@ def generate_qr_code(request):
     if not bbo_number:
         return HttpResponse("No BBO number found in session. Please verify the lawyer first.", status=400)
 
-    qr_data = f"https://mockapi-xlku.onrender.com/bar_cards/display/{bbo_number}/"
+    qr_data = f"https://digitalbarcard.onrender.com/bar_cards/display/{bbo_number}/"
     qr = qrcode.QRCode(
         version=1,
         error_correction=qrcode.constants.ERROR_CORRECT_L,
