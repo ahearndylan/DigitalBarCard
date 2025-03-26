@@ -1,37 +1,33 @@
-Digital Bar Card Project Overview 
-Project Idea:
-The Digital Bar Card project aims to replace traditional paper-based Bar Cards for Massachusetts lawyers with digital versions. These cards can be stored on mobile devices, like Apple Wallet, and used for verification in court. The project integrates with the Massachusetts Board of Bar Overseers (BBO) database for lawyer verification.
 
-Key Features:
-User Registration & Authentication:
+## Database
 
-General users can create accounts.
-Lawyers can verify their credentials via the BBO database.
+- Uses **SQLite** for local development.
+- Intended to be upgraded to **PostgreSQL** for production deployment.
 
-Digital Bar Card Generation:
-Verified lawyers can generate and store a digital Bar Card.
-Cards include a scannable code for real-time verification.
-Security & Logout:
+## Version Control
 
-Logout functionality redirects users to the login screen.
-Project Structure:
-Main Project (digital_bar_card/): Contains core Django settings and configurations.
+- Project is tracked using Git and GitHub.
+- A `.gitignore` is used to exclude sensitive and unnecessary files (e.g., virtual environments, migrations, etc.)
 
-Apps:
-users/: Manages user registration, login, and profile.
-bar_cards/: Handles Bar Card generation and storage.
-verification/: Manages lawyer verification.
+## Development Process
 
-Database: Uses SQLite for development.
+- Built with Django and Python
+- Frontend uses HTML, CSS, and JavaScript
+- Deployed on Render.com for live access
+- Integrated with a mock BBO API to simulate lawyer verification
 
-Version Control: Project is tracked on GitHub, with a .gitignore to exclude unnecessary files.
+## Live Demo & Repositories
 
-Development Process:
-Set up Django apps for users, Bar Cards, and verification.
-Implemented user authentication and lawyer verification.
-Developed digital Bar Card generation and security features.
-Version-controlled the project on GitHub.
-This structure ensures the project is organized, secure, and ready for further development and deployment.
+- **Live Demo:** [https://dylan-ahearn.onrender.com/BARCARDproject.html](https://dylan-ahearn.onrender.com/BARCARDproject.html)
+- **Main Repo:** [https://github.com/ahearndylan/DigitalBarCard](https://github.com/ahearndylan/DigitalBarCard)
+- **Mock API Repo:** [https://github.com/ahearndylan/mockAPI](https://github.com/ahearndylan/mockAPI)
+
+## Future Features (Planned)
+
+- Real-time integration with the official BBO API
+- One-stop Bar dues payment system
+- Apple Wallet / Google Wallet integration
+- Malpractice insurance status tracking
 
 ## License
 
