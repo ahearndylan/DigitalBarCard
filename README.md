@@ -18,7 +18,7 @@
 
 ## Live Demo & Repositories
 
-- **Live Demo:** [https://dylan-ahearn.onrender.com/BARCARDproject.html](https://dylan-ahearn.onrender.com/BARCARDproject.html)
+- **Live Demo:** [https://digitalbarcard.onrender.com/](https://digitalbarcard.onrender.com/)
 - **Main Repo:** [https://github.com/ahearndylan/DigitalBarCard](https://github.com/ahearndylan/DigitalBarCard)
 - **Mock API Repo:** [https://github.com/ahearndylan/mockAPI](https://github.com/ahearndylan/mockAPI)
 
