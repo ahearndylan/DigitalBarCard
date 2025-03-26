@@ -33,4 +33,8 @@ Developed digital Bar Card generation and security features.
 Version-controlled the project on GitHub.
 This structure ensures the project is organized, secure, and ready for further development and deployment.
 
-https://aeconners16.atlassian.net/jira/software/projects/KAN/boards/1?atlOrigin=eyJpIjoiZmNhZmUxOGEyOGJlNDBjZjgyNWJjMzVjMzJjNTY1YmEiLCJwIjoiaiJ9
+## License
+
+This project is licensed under the [MIT License](LICENSE). You are free to use, modify, and distribute this code, provided that proper credit is given. For any commercial or official use, please contact the creator.
+
+© 2024 Dylan Ahearn
